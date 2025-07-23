@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catan Soundboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Catan Soundboard</h1>
+    <h3>Choose your character</h3>
+    <div class="player-selection">
+        <span class="player-icon player-1 active"></span>
+        <span class="player-icon player-2"></span>
+        <span class="player-icon player-3"></span>
+        <span class="player-icon player-4"></span>
+    </div>
+<div id="soundboard" class="grid"></div>
+<details>
+    <summary>Alternativ</summary>
+    <div class="upload-container">
+        <div>
+            <h2>Spelläge</h2>
+            <p>Live-synkar ljud med alla andra som har spelläge påslaget</p>
+            <label for="sync-toggle">Aktivera</label>
+            <input type="checkbox" id="sync-toggle"/>
+        </div>
+        <div>
+            <h2>Ladda opp nytt ljud</h2>
+            <input type="file" id="sound-upload" accept=".mp3">
+            <button id="upload-button">Ladda upp</button>
+        </div>
+    </div>
+</details>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="script.js"></script>
+</body>
+</html>
