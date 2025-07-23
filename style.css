@@ -15,27 +15,67 @@ body {
     cursor: pointer;
     padding: 0.2em;
     border-radius: 50%;
-    border: 2px solid transparent;
+    border: 1px solid gray;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
 }
 
 .player-icon.active {
-    border-color: #4CAF50;
+    border: 2px solid #4CAF50;
 }
 
-.player-icon.player-1::before { content: '🐱'; }
-.player-icon.player-2::before { content: '🐭'; }
-.player-icon.player-3::before { content: '🐨'; }
-.player-icon.player-4::before { content: '🐶'; }
+.player-icon.player-1 {
+    background: url("static/images/erik.png") no-repeat center;
+    background-size: cover;
+}
 
-.sound-button .player-display.player-1::before { content: '🐱'; }
-.sound-button .player-display.player-2::before { content: '🐭'; }
-.sound-button .player-display.player-3::before { content: '🐨'; }
-.sound-button .player-display.player-4::before { content: '🐶'; }
+.player-icon.player-2 {
+    background: url("static/images/simon.png") no-repeat center;
+    background-size: cover;
+}
+
+.player-icon.player-3 {
+    background: url("static/images/theo.png") no-repeat center;
+    background-size: cover;
+}
+.player-icon.player-4 {
+    background: url("static/images/mimmi.png") no-repeat center;
+    background-size: cover;
+}
+
+.sound-button .player-display.player-1 {
+    background: url("static/images/erik.png") no-repeat center;
+    background-size: cover;
+}
+
+.sound-button .player-display.player-2 {
+    background: url("static/images/simon.png") no-repeat center;
+    background-size: cover;
+}
+
+.sound-button .player-display.player-3 {
+    background: url("static/images/theo.png") no-repeat center;
+    background-size: cover;
+}
+
+.sound-button .player-display.player-4 {
+    background: url("static/images/mimmi.png") no-repeat center;
+    background-size: cover;
+}
 
 .sound-button .player-display {
     position: absolute;
     top: 5px;
-    right: 10px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.5em;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
