@@ -18,7 +18,7 @@ function playSound(fileName, iconClass) {
     if (button) {
         const playerDisplay = button.querySelector('.player-display');
         const audio = new Audio(supabase.storage.from('sounds').getPublicUrl(fileName).data.publicUrl);
-        
+
         playerDisplay.className = `player-display ${iconClass}`;
         button.classList.add('playing');
         audio.play();
@@ -31,7 +31,7 @@ function playSound(fileName, iconClass) {
 }
 
 async function fetchSounds() {
-    const { data, error } = await supabase
+    const {data, error} = await supabase
         .storage
         .from('sounds')
         .list();
@@ -46,7 +46,19 @@ async function fetchSounds() {
         const button = document.createElement('button');
         button.textContent = file.name.replace('.mp3', '');
         button.classList.add('sound-button');
-        button.dataset.fileName = file.name; // Store filename
+
+        switch (button.textContent) {
+            case 'WIDE PUTIN':
+                button.classList.add('wide-putin');
+                break;
+
+            case 'Finnish':
+                button.classList.add('finnish');
+                break;
+        }
+
+
+        button.dataset.fileName = file.name;
 
         const playerDisplay = document.createElement('span');
         playerDisplay.classList.add('player-display');
@@ -59,7 +71,7 @@ async function fetchSounds() {
                 channel.send({
                     type: 'broadcast',
                     event: 'play-sound',
-                    payload: { name: file.name, iconClass: selectedIconClass }
+                    payload: {name: file.name, iconClass: selectedIconClass}
                 });
             }
         });
@@ -75,7 +87,7 @@ uploadButton.addEventListener('click', async () => {
     }
 
     const fileName = `${file.name}`;
-    const { error } = await supabase
+    const {error} = await supabase
         .storage
         .from('sounds')
         .upload(fileName, file);
@@ -84,7 +96,7 @@ uploadButton.addEventListener('click', async () => {
         console.error('Error uploading sound:', error);
         alert('Error uploading sound.');
     } else {
-        channel.send({ type: 'broadcast', event: 'new-upload' });
+        channel.send({type: 'broadcast', event: 'new-upload'});
     }
 });
 
@@ -101,10 +113,10 @@ playerIcons.forEach((icon, index) => {
 syncToggle.addEventListener('change', () => {
     if (syncToggle.checked) {
         channel
-            .on('broadcast', { event: 'play-sound' }, (payload) => {
+            .on('broadcast', {event: 'play-sound'}, (payload) => {
                 playSound(payload.payload.name, payload.payload.iconClass);
             })
-            .on('broadcast', { event: 'new-upload' }, () => {
+            .on('broadcast', {event: 'new-upload'}, () => {
                 fetchSounds();
             })
             .subscribe();

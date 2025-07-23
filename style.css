@@ -114,7 +114,7 @@ body {
     grid-column: span 2;
 }
 
-.finland.playing {
+.finnish.playing {
     background-color: #ffffff;
     background-image: linear-gradient(#002F6C, #002F6C), linear-gradient(#002F6C, #002F6C);
     background-size: 100% 25%, 15% 100%;
