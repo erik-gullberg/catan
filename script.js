@@ -7,9 +7,13 @@ const soundUpload = document.getElementById('sound-upload');
 const uploadButton = document.getElementById('upload-button');
 const syncToggle = document.getElementById('sync-toggle');
 const playerIcons = document.querySelectorAll('.player-icon');
+const muteButton = document.getElementById('mute-button');
+const volumeSlider = document.getElementById('volume-slider');
 
 const channel = supabase.channel('soundboard-channel');
 let selectedIconClass = 'player-1'; // Default icon class
+let isMuted = false;
+let currentVolume = 1;
 
 function playSound(fileName, iconClass) {
     const buttons = document.querySelectorAll('.sound-button');
@@ -18,6 +22,7 @@ function playSound(fileName, iconClass) {
     if (button) {
         const playerDisplay = button.querySelector('.player-display');
         const audio = new Audio(supabase.storage.from('sounds').getPublicUrl(fileName).data.publicUrl);
+        audio.volume = isMuted ? 0 : currentVolume;
 
         playerDisplay.className = `player-display ${iconClass}`;
         button.classList.add('playing');
@@ -96,6 +101,7 @@ uploadButton.addEventListener('click', async () => {
         console.error('Error uploading sound:', error);
         alert('Error uploading sound.');
     } else {
+        fetchSounds();
         channel.send({type: 'broadcast', event: 'new-upload'});
     }
 });
@@ -125,6 +131,11 @@ syncToggle.addEventListener('change', () => {
     }
 });
 
+// Volume slider
+volumeSlider.addEventListener('input', (e) => {
+    currentVolume = parseFloat(e.target.value);
+    isMuted = currentVolume === 0;
+});
+
 // Initial fetch
 fetchSounds();
-
